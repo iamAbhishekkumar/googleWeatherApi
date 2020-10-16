@@ -34,5 +34,15 @@ def get_weather(query):
     return jsonify(weather_map)
 
 
+@app.route('/cr/<query>')
+def get_coordinate(query):
+    coordinates = get_coordinates(query)
+    coordinate_map = {
+        "longitude": coordinates[0],
+        "latitude": coordinates[1],
+    }
+    return jsonify(coordinate_map)
+
+
 if __name__ == '__main__':
     app.run()
