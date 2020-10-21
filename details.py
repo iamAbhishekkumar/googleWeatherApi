@@ -1,6 +1,24 @@
 from helper import inner_html, remove_tags
 
 
+def hourly_forecast(soup):
+    temp_map = {}
+    for i in range(1, 6):
+        time = inner_html(soup.select(
+            f'.HourlyWeatherCard--TableWrapper--2kboH > ul:nth-child(1) > li:nth-child({i}) > a:nth-child(1) > h3:nth-child(1) > span:nth-child(1)'))
+        temp = inner_html(soup.select(
+            f'.HourlyWeatherCard--TableWrapper--2kboH > ul:nth-child(1) > li:nth-child({i}) > a:nth-child(1) > div:nth-child(2) > span:nth-child(1)'))
+        precipitation = remove_tags(str(soup.select(
+            f'.HourlyWeatherCard--TableWrapper--2kboH > ul:nth-child(1) > li:nth-child({i}) > a:nth-child(1) > div:nth-child(4)')[0]))
+        temp_map[i] = {
+
+            "time": time,
+            "highest_temp": temp,
+            "precipitation": precipitation
+        }
+    return temp_map
+
+
 def daily_forecast(soup):
     temp_map = {}
     for i in range(1, 6):
@@ -15,7 +33,7 @@ def daily_forecast(soup):
             f"div:nth-child(3) > span:nth-child(1)"))
         precipitation = remove_tags(str(soup.select(
             f".DailyWeatherCard--TableWrapper--12r1N > ul:nth-child(1) > li:nth-child({i}) > a:nth-child(1) > "
-            f"div:nth-child(5)")))
+            f"div:nth-child(5)")[0]))
         temp_map[i] = {
             "time": time,
             "highest_temp": highest_temp,
@@ -36,7 +54,7 @@ def today_forecast(soup):
                 "temperature": inner_html(soup.select(
                     f'.WeatherTable--wide--YogM9 > li:nth-child({i}) > a:nth-child(1) > div:nth-child(2) > '
                     f'span:nth-child(1)')),
-                "precipitation": remove_tags(str(soup.select(precip_selector))),
+                "precipitation": remove_tags(str(soup.select(precip_selector)[0])),
             }
         except IndexError:
             precip_selector = f'li.Column--active--FeXwd:nth-child({i}) > a:nth-child(1) > div:nth-child(4)'

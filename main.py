@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from coordinates import get_coordinates
 from helper import inner_html
-from details import today_forecast, today_weather_details, daily_forecast
+from details import today_forecast, today_weather_details, daily_forecast,hourly_forecast
 from flask import Flask, jsonify
 
 app = Flask(__name__)
@@ -28,7 +28,9 @@ def get_weather(query):
         "place": place,
         "today_weather_details": today_weather_details(soup),
         "today_forecast": today_forecast(soup),
+        "hourly_forecast": hourly_forecast(soup),
         "daily_forecast": daily_forecast(soup)
+
     }
 
     return jsonify(weather_map)
