@@ -18,3 +18,9 @@ For eg.
 ```shell
 https://google-weather-api.herokuapp.com/cr/delhi
 ```
+
+#### TODO:
+
+- get weather for a given coordinate rather then place
+- get teh weather icons
+ 

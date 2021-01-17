@@ -9,7 +9,8 @@ def hourly_forecast(soup):
         temp = inner_html(soup.select(
             f'.HourlyWeatherCard--TableWrapper--2kboH > ul:nth-child(1) > li:nth-child({i}) > a:nth-child(1) > div:nth-child(2) > span:nth-child(1)'))
         precipitation = remove_tags(str(soup.select(
-            f'.HourlyWeatherCard--TableWrapper--2kboH > ul:nth-child(1) > li:nth-child({i}) > a:nth-child(1) > div:nth-child(4)')[0]))
+            f'.HourlyWeatherCard--TableWrapper--2kboH > ul:nth-child(1) > li:nth-child({i}) > a:nth-child(1) > div:nth-child(4)')[
+                                            0]))
         temp_map[i] = {
 
             "time": time,
@@ -73,6 +74,10 @@ def today_forecast(soup):
 def today_weather_details(soup):
     weather_type = inner_html(soup.select('.CurrentConditions--phraseValue--2xXSr'))
     avg_temperature = inner_html(soup.select('.TodayDetailsCard--feelsLikeTempValue--2aogo'))
+    today_max_temp = inner_html(
+        soup.select('div.ListItem--listItem--1r7mf:nth-child(1) > div:nth-child(3) > span:nth-child(1)'))
+    today_min_temp = inner_html(
+        soup.select('div.ListItem--listItem--1r7mf:nth-child(1) > div:nth-child(3) > span:nth-child(2)'))
     wind_speed = remove_tags(inner_html(soup.select('.Wind--windWrapper--1Va1P')))
     humidity = inner_html(
         soup.select('div.ListItem--listItem--1r7mf:nth-child(3) > div:nth-child(3) > span:nth-child(1)'))
@@ -85,6 +90,8 @@ def today_weather_details(soup):
     temp_map = {
         "weather_type": weather_type,
         "avg_temperature": avg_temperature,
+        "today_max_temp": today_max_temp,
+        "today_min_temp": today_min_temp,
         "wind_speed": wind_speed,
         "humidity": humidity,
         "pressure": pressure,
