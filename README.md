@@ -14,13 +14,20 @@ Actually, it is the api for [weather.com](https://weather.com/en-IN/) that googl
     ```shell
     https://google-weather-api.herokuapp.com/cr/<cityName>
     ```
+- For getting weather for a given coordinates : 
+    ```shell
+    https://google-weather-api.herokuapp.com/place/cr/<gpsCoordinates>
+    ```
 For eg. 
 ```shell
 https://google-weather-api.herokuapp.com/cr/delhi
 ```
 
+```shell
+https://google-weather-api.herokuapp.com/place/cr/22.307,73.181
+```
+
 #### TODO:
 
-- get weather for a given coordinate rather then place
 - get the weather icons
  

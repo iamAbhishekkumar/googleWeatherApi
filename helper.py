@@ -7,3 +7,10 @@ def inner_html(element):
 
 def remove_tags(string: str):
     return re.sub('<(.*?)>+', "", string)
+
+
+# def errorHtml():
+#     return {
+#         "status": 0,
+#         "response": "error",
+#     }
